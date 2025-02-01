@@ -1,22 +1,22 @@
 export const itemsNavbar =[
     {
         name: "Home",
-        Link: "/"
+        link: "/"
     },
     {
         name: "Series",
-        Link: "/series"
+        link: "/series"
     },
     {
         name: "Peliculas",
-        Link: "/peliculas"
+        link: "/peliculas"
     },
     {
         name: "Novedades mas vistas",
-        Link: "/more-views"
+        link: "/more-views"
     },
     {
         name: "Mi lista",
-        Link: "/my-list"
+        link: "/my-list"
     },
 ];
