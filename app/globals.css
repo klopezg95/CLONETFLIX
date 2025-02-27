@@ -82,3 +82,38 @@ html, body, :root {
     @apply bg-background text-white;
   }
 }
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Registro de cuenta*/
+/* Toast de éxito */
+[data-sonner-toast].toast-success {
+  background-color: #16a34a !important; /* Verde (green-600) */
+  color: white !important;
+  border: 1px solid #15803d; /* Verde oscuro */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: bold;
+}
+
+/* Toast de error */
+[data-sonner-toast].toast-error {
+  background-color: #dc2626 !important; /* Rojo */
+  color: white !important;
+  border: 1px solid #b91c1c;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: bold;
+}
+
