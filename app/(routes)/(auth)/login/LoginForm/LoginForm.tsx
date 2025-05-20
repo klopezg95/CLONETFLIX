@@ -16,9 +16,14 @@ import { Input } from "@/components/ui/input";
 import { formSchema } from "./LoginForm.form";
 import { z } from "zod";
 import { FormError } from "./FormError";
+import { login } from "@/actions/login";
+import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
+  const router = useRouter();
   const [error, setError] = useState<string | undefined>("");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,9 +32,21 @@ export function LoginForm() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     //TODO: Put setError
-    console.log(values);
+    try {
+      login(values).then((data) => {
+        setError(data?.error);
+        if (data?.success) {
+          toast({
+            tittle: "Login se ha realizado con exito",
+          });
+        }
+      });
+      router.push("/profiles");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Form {...form}>
