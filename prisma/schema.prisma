@@ -21,6 +21,20 @@ model User {
   image         String?
   password      String?
 
+  userNetflix UserNetflix[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserNetflix {
+  id          String @id @default(cuid())
+  profileName String
+  avatarUrl   String
+
+  userId String
+  User   User   @relation(fields: [userId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
