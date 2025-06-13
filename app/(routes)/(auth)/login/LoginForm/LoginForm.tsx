@@ -33,13 +33,12 @@ export function LoginForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    //TODO: Put setError
     try {
       login(values).then((data) => {
         setError(data?.error);
         if (data?.success) {
           toast({
-            tittle: "Login se ha realizado con exito",
+            title: "Login se ha realizado con éxito",
           });
         }
       });

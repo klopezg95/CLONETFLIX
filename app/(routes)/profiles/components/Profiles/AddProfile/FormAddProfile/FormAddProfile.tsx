@@ -21,6 +21,8 @@ import { dataProfilesImages } from "./FormAddProfile.data";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import axios from "axios";
+import { toast } from "sonner";
 
 export function FormAddProfile(props: FormAddProfileProps) {
   const { setOpen } = props;
@@ -35,8 +37,31 @@ export function FormAddProfile(props: FormAddProfileProps) {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post("/api/userNetflix", values);
+      if (response.status !== 200) {
+        toast("Ops! Ha ocurrido un error", {
+          description: "Error",
+          className: "toast-error",
+        });
+      } else {
+        toast("¡Usuario creado correctamente!", {
+          description: "el usuario se ha creado",
+          className: "toast-success",
+        });
+      }
+      router.refresh();
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
+      toast("Ops! Ha ocurrido un error", {
+        description: "Error",
+        className: "toast-error",
+      });
+      setIsLoading(false);
+    }
   };
   return (
     <Form {...form}>
